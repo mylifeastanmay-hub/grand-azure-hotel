@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Rooms — Grand Azure{% endblock %}
+{% block page_title %}Room Management{% endblock %}
+
+{% block content %}
+<div class="page-actions">
+  <div class="filter-row">
+    <select class="form-select" id="filterStatus" onchange="loadRooms()">
+      <option value="">All Statuses</option>
+      <option value="available">Available</option>
+      <option value="occupied">Occupied</option>
+      <option value="maintenance">Maintenance</option>
+      <option value="reserved">Reserved</option>
+    </select>
+    <select class="form-select" id="filterType" onchange="loadRooms()">
+      <option value="">All Types</option>
+      <option value="Standard">Standard</option>
+      <option value="Deluxe">Deluxe</option>
+      <option value="Suite">Suite</option>
+      <option value="Presidential">Presidential</option>
+    </select>
+  </div>
+  <button class="btn btn-primary" onclick="openAddRoom()">+ Add Room</button>
+</div>
+
+<div class="rooms-grid" id="roomsGrid">
+  <div class="table-empty">Loading rooms…</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/rooms.js') }}"></script>
+{% endblock %}

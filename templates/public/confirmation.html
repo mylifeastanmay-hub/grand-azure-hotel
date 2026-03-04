@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Booking Confirmed — Grand Azure Hotel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/public.css"/>
+</head>
+<body>
+
+<nav class="pub-nav scrolled">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">
+      <span class="nav-brand-icon">✦</span>
+      <span class="nav-brand-name">Grand Azure</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/rooms">Rooms</a>
+      <a href="/lookup">My Booking</a>
+      <a href="/book" class="nav-cta">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<section class="confirmation-section">
+  <div class="confirmation-box">
+    <div class="confirm-icon">✦</div>
+    <h1 class="confirm-title">Booking Confirmed!</h1>
+    <p class="confirm-sub">Thank you for choosing Grand Azure Hotel. Your reservation is confirmed.</p>
+
+    <div class="confirm-ref">
+      Reservation #<strong>{{ reservation.reservation_id }}</strong>
+    </div>
+
+    <div class="confirm-details">
+      <div class="cd-row"><span>Guest</span><strong>{{ reservation.guest.name }}</strong></div>
+      <div class="cd-row"><span>Email</span><strong>{{ reservation.guest.email }}</strong></div>
+      <div class="cd-row"><span>Room</span><strong>{{ reservation.room.room_number }} — {{ reservation.room.room_type }}</strong></div>
+      <div class="cd-row"><span>Check In</span><strong>{{ reservation.check_in_date.strftime('%B %d, %Y') }}</strong></div>
+      <div class="cd-row"><span>Check Out</span><strong>{{ reservation.check_out_date.strftime('%B %d, %Y') }}</strong></div>
+      <div class="cd-row"><span>Guests</span><strong>{{ reservation.adults }} adult(s){% if reservation.children > 0 %}, {{ reservation.children }} child(ren){% endif %}</strong></div>
+      <div class="cd-row cd-total"><span>Total Amount</span><strong>${{ "%.2f"|format(reservation.total_price) }}</strong></div>
+    </div>
+
+    {% if reservation.special_requests %}
+    <div class="confirm-special">
+      <strong>Special Requests:</strong> {{ reservation.special_requests }}
+    </div>
+    {% endif %}
+
+    <div class="confirm-notice">
+      <p>Please save your reservation number <strong>#{{ reservation.reservation_id }}</strong>.</p>
+      <p>You can use it along with your email to look up your booking anytime.</p>
+    </div>
+
+    <div class="confirm-actions">
+      <a href="/invoices/view/{{ reservation.reservation_id }}" target="_blank" class="btn-outline-gold">Download Invoice</a>
+      <a href="/" class="btn-gold-lg">Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<footer class="pub-footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="nav-brand-icon">✦</span><span class="footer-name">Grand Azure Hotel</span></div>
+    <p class="footer-copy">© 2024 Grand Azure Hotel. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

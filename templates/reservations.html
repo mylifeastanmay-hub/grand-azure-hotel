@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Reservations — Grand Azure{% endblock %}
+{% block page_title %}Reservations{% endblock %}
+
+{% block content %}
+<div class="page-actions">
+  <div class="filter-row">
+    <select class="form-select" id="filterStatus" onchange="loadReservations()">
+      <option value="">All Statuses</option>
+      <option value="confirmed">Confirmed</option>
+      <option value="checked_in">Checked In</option>
+      <option value="checked_out">Checked Out</option>
+      <option value="cancelled">Cancelled</option>
+    </select>
+  </div>
+  <button class="btn btn-primary" onclick="openNewReservation()">+ New Reservation</button>
+</div>
+
+<div class="card">
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th><th>Guest</th><th>Room</th><th>Check-in</th><th>Check-out</th><th>Total</th><th>Status</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="reservationsBody">
+        <tr><td colspan="8" class="table-empty">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/reservations.js') }}"></script>
+{% endblock %}

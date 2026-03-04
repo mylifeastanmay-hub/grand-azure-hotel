@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Staff — Grand Azure{% endblock %}
+{% block page_title %}Staff Management{% endblock %}
+{% block content %}
+<div class="page-actions">
+  <div></div>
+  <button class="btn btn-primary" onclick="openAddStaff()">+ Add Staff</button>
+</div>
+<div class="card">
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead><tr><th>ID</th><th>Name</th><th>Position</th><th>Shift</th><th>Contact</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="staffBody"><tr><td colspan="8" class="table-empty">Loading…</td></tr></tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/staff.js') }}"></script>{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Services — Grand Azure{% endblock %}
+{% block page_title %}Room Services{% endblock %}
+{% block content %}
+<div class="tabs-row">
+  <button class="tab-btn active" onclick="switchTab('services', this)">Service Catalog</button>
+  <button class="tab-btn" onclick="switchTab('orders', this)">Orders</button>
+</div>
+
+<div id="tab-services">
+  <div class="page-actions">
+    <div></div>
+    <button class="btn btn-primary" onclick="openAddService()">+ Add Service</button>
+  </div>
+  <div class="services-grid" id="servicesGrid">Loading…</div>
+</div>
+
+<div id="tab-orders" style="display:none">
+  <div class="page-actions">
+    <div></div>
+    <button class="btn btn-primary" onclick="openNewOrder()">+ New Order</button>
+  </div>
+  <div class="card">
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead><tr><th>#</th><th>Guest</th><th>Service</th><th>Qty</th><th>Total</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+        <tbody id="ordersBody"><tr><td colspan="8" class="table-empty">Loading…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/services.js') }}"></script>{% endblock %}

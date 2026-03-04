@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grand Azure Hotel — Luxury Stays</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/public.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="pub-nav" id="pubNav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">
+      <span class="nav-brand-icon">✦</span>
+      <span class="nav-brand-name">Grand Azure</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/rooms">Rooms</a>
+      <a href="/lookup">My Booking</a>
+      <a href="/book" class="nav-cta">Book Now</a>
+    </div>
+    <button class="nav-hamburger" onclick="toggleMobileNav()">☰</button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="/">Home</a>
+    <a href="/rooms">Rooms</a>
+    <a href="/lookup">My Booking</a>
+    <a href="/book">Book Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Welcome to</p>
+    <h1 class="hero-title">Grand Azure<br/><em>Hotel</em></h1>
+    <p class="hero-sub">Where every stay is a masterpiece of luxury, comfort, and unforgettable moments.</p>
+
+    <!-- Quick Search -->
+    <div class="hero-search">
+      <div class="search-field">
+        <label>Check In</label>
+        <input type="date" id="heroCI" />
+      </div>
+      <div class="search-divider"></div>
+      <div class="search-field">
+        <label>Check Out</label>
+        <input type="date" id="heroCO" />
+      </div>
+      <div class="search-divider"></div>
+      <div class="search-field">
+        <label>Room Type</label>
+        <select id="heroType">
+          <option value="">Any Type</option>
+          <option value="Standard">Standard</option>
+          <option value="Deluxe">Deluxe</option>
+          <option value="Suite">Suite</option>
+          <option value="Presidential">Presidential</option>
+        </select>
+      </div>
+      <button class="search-btn" onclick="heroSearch()">Search Rooms</button>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll to explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">10+</div><div class="stat-lbl">Room Categories</div></div>
+    <div class="stat-item"><div class="stat-num">5★</div><div class="stat-lbl">Guest Rating</div></div>
+    <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-lbl">Concierge Service</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Satisfaction Guaranteed</div></div>
+  </div>
+</section>
+
+<!-- ROOMS PREVIEW -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Accommodations</p>
+      <h2 class="section-title">Our Finest Rooms</h2>
+      <p class="section-sub">Each room is thoughtfully designed to deliver an exceptional experience</p>
+    </div>
+    <div class="rooms-preview-grid" id="roomsPreview">
+      <div class="rooms-loading">Loading rooms...</div>
+    </div>
+    <div class="section-action">
+      <a href="/rooms" class="btn-outline-gold">View All Rooms</a>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Experience</p>
+      <h2 class="section-title">World-Class Amenities</h2>
+    </div>
+    <div class="amenities-grid">
+      <div class="amenity-card">
+        <div class="amenity-icon">🍽</div>
+        <h3>Fine Dining</h3>
+        <p>Exquisite cuisine crafted by award-winning chefs, delivered to your room or enjoyed in our restaurant.</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">💆</div>
+        <h3>Spa & Wellness</h3>
+        <p>Rejuvenate your body and mind with our full-service spa, featuring massages and beauty treatments.</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🏊</div>
+        <h3>Swimming Pool</h3>
+        <p>Dive into our stunning pool with panoramic views, available for all guests throughout the day.</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🚗</div>
+        <h3>Airport Transfer</h3>
+        <p>Seamless private transfers to and from the airport in luxury vehicles at your convenience.</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">📶</div>
+        <h3>High-Speed WiFi</h3>
+        <p>Stay connected with complimentary high-speed internet throughout the entire property.</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🛎</div>
+        <h3>24/7 Concierge</h3>
+        <p>Our dedicated concierge team is available around the clock to fulfill your every request.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="cta-title">Ready for an Unforgettable Stay?</h2>
+    <p class="cta-sub">Book directly for the best rates and exclusive benefits</p>
+    <a href="/book" class="btn-gold-lg">Reserve Your Room</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="pub-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="nav-brand-icon">✦</span>
+      <span class="footer-name">Grand Azure Hotel</span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/rooms">Rooms</a>
+      <a href="/book">Book Now</a>
+      <a href="/lookup">My Booking</a>
+      <a href="/auth/login">Staff Login</a>
+    </div>
+    <p class="footer-copy">© 2024 Grand Azure Hotel. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Set default dates
+  const today = new Date();
+  const tmr   = new Date(today); tmr.setDate(tmr.getDate() + 1);
+  const fmt   = d => d.toISOString().split('T')[0];
+  document.getElementById('heroCI').value = fmt(today);
+  document.getElementById('heroCO').value = fmt(tmr);
+  document.getElementById('heroCI').min   = fmt(today);
+  document.getElementById('heroCO').min   = fmt(tmr);
+
+  function heroSearch() {
+    const ci   = document.getElementById('heroCI').value;
+    const co   = document.getElementById('heroCO').value;
+    const type = document.getElementById('heroType').value;
+    let url = `/rooms?check_in=${ci}&check_out=${co}`;
+    if (type) url += `&room_type=${type}`;
+    window.location.href = url;
+  }
+
+  // Scroll nav effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('pubNav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  function toggleMobileNav() {
+    document.getElementById('navMobile').classList.toggle('open');
+  }
+
+  // Load room preview
+  async function loadRoomsPreview() {
+    const res   = await fetch('/api/rooms');
+    const rooms = await res.json();
+    const grid  = document.getElementById('roomsPreview');
+    const icons = { Standard: '🛏', Deluxe: '🌟', Suite: '👑', Presidential: '💎' };
+
+    if (!rooms.length) {
+      grid.innerHTML = '<p style="color:#8FA3B8;text-align:center">No rooms available right now.</p>';
+      return;
+    }
+
+    grid.innerHTML = rooms.slice(0, 3).map(r => `
+      <div class="room-preview-card">
+        <div class="rpc-header">
+          <div class="rpc-icon">${icons[r.room_type] || '🛏'}</div>
+          <div class="rpc-badge">${r.room_type}</div>
+        </div>
+        <div class="rpc-body">
+          <h3 class="rpc-name">Room ${r.room_number}</h3>
+          <p class="rpc-desc">${r.description || 'A beautifully appointed room with premium amenities.'}</p>
+          <div class="rpc-amenities">${(r.amenities || '').split(',').slice(0,3).map(a => `<span>${a.trim()}</span>`).join('')}</div>
+          <div class="rpc-footer">
+            <div class="rpc-price">$${parseFloat(r.price_per_night).toFixed(0)}<span>/night</span></div>
+            <a href="/book?room_id=${r.room_id}" class="rpc-btn">Book Now</a>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  loadRoomsPreview();
+</script>
+</body>
+</html>

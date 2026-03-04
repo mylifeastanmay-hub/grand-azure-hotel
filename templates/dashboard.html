@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Grand Azure{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-grid">
+
+  <!-- Stat Cards -->
+  <div class="stats-row" id="statsRow">
+    <div class="stat-card stat-blue">
+      <div class="stat-icon">🛏</div>
+      <div class="stat-value" id="stat-occupancy">—</div>
+      <div class="stat-label">Occupancy Rate</div>
+      <div class="stat-sub" id="stat-rooms">— / — rooms</div>
+    </div>
+    <div class="stat-card stat-gold">
+      <div class="stat-icon">💰</div>
+      <div class="stat-value" id="stat-revenue">—</div>
+      <div class="stat-label">Monthly Revenue</div>
+      <div class="stat-sub" id="stat-today-rev">Today: —</div>
+    </div>
+    <div class="stat-card stat-green">
+      <div class="stat-icon">📅</div>
+      <div class="stat-value" id="stat-reservations">—</div>
+      <div class="stat-label">Active Reservations</div>
+      <div class="stat-sub" id="stat-checkins">Check-ins today: —</div>
+    </div>
+    <div class="stat-card stat-purple">
+      <div class="stat-icon">👤</div>
+      <div class="stat-value" id="stat-guests">—</div>
+      <div class="stat-label">Total Guests</div>
+      <div class="stat-sub" id="stat-checkouts">Check-outs today: —</div>
+    </div>
+  </div>
+
+  <!-- Charts row -->
+  <div class="charts-row">
+    <div class="card chart-card">
+      <div class="card-header">
+        <h3 class="card-title">Revenue — Last 7 Days</h3>
+      </div>
+      <div class="chart-container">
+        <canvas id="revenueChart"></canvas>
+      </div>
+    </div>
+    <div class="card chart-card">
+      <div class="card-header">
+        <h3 class="card-title">Room Types</h3>
+      </div>
+      <div class="chart-container">
+        <canvas id="roomTypesChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Reservations -->
+  <div class="card full-width">
+    <div class="card-header">
+      <h3 class="card-title">Recent Reservations</h3>
+      <a href="/reservations/" class="btn btn-sm btn-outline">View All</a>
+    </div>
+    <div class="table-wrapper">
+      <table class="data-table" id="recentTable">
+        <thead>
+          <tr>
+            <th>#</th><th>Guest</th><th>Room</th><th>Check-in</th><th>Check-out</th><th>Total</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="recentBody">
+          <tr><td colspan="7" class="table-empty">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

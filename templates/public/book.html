@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book a Room — Grand Azure Hotel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/public.css"/>
+</head>
+<body>
+
+<nav class="pub-nav scrolled">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">
+      <span class="nav-brand-icon">✦</span>
+      <span class="nav-brand-name">Grand Azure</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/rooms">Rooms</a>
+      <a href="/lookup">My Booking</a>
+      <a href="/book" class="nav-cta active">Book Now</a>
+    </div>
+    <button class="nav-hamburger" onclick="toggleMobileNav()">☰</button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="/">Home</a><a href="/rooms">Rooms</a><a href="/lookup">My Booking</a><a href="/book">Book Now</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-content">
+    <p class="hero-eyebrow">Reservations</p>
+    <h1 class="page-hero-title">Book Your Stay</h1>
+    <p class="page-hero-sub">Complete your reservation in just a few steps</p>
+  </div>
+</section>
+
+<section class="booking-section">
+  <div class="booking-layout">
+
+    <!-- STEP 1: Select Room -->
+    <div class="booking-step" id="step1">
+      <div class="step-header">
+        <div class="step-num">1</div>
+        <h2 class="step-title">Select Your Room</h2>
+      </div>
+
+      <div class="date-row">
+        <div class="date-field">
+          <label>Check In *</label>
+          <input type="date" id="bCI" class="pub-input"/>
+        </div>
+        <div class="date-field">
+          <label>Check Out *</label>
+          <input type="date" id="bCO" class="pub-input"/>
+        </div>
+        <div class="date-field">
+          <label>Adults</label>
+          <select id="bAdults" class="pub-input">
+            <option value="1">1 Adult</option>
+            <option value="2">2 Adults</option>
+            <option value="3">3 Adults</option>
+            <option value="4">4 Adults</option>
+          </select>
+        </div>
+        <div class="date-field">
+          <label>Children</label>
+          <select id="bChildren" class="pub-input">
+            <option value="0">0 Children</option>
+            <option value="1">1 Child</option>
+            <option value="2">2 Children</option>
+            <option value="3">3 Children</option>
+          </select>
+        </div>
+        <button class="filter-btn" onclick="searchAvailable()">Check Availability</button>
+      </div>
+
+      <div id="availableRooms" class="available-rooms"></div>
+    </div>
+
+    <!-- STEP 2: Guest Details -->
+    <div class="booking-step" id="step2" style="display:none">
+      <div class="step-header">
+        <div class="step-num">2</div>
+        <h2 class="step-title">Your Details</h2>
+      </div>
+
+      <!-- Selected Room Summary -->
+      <div class="selected-room-summary" id="selectedRoomSummary"></div>
+
+      <div class="guest-form">
+        <div class="form-row-2">
+          <div class="pub-form-group">
+            <label>Full Name *</label>
+            <input type="text" id="gName" class="pub-input" placeholder="Your full name"/>
+          </div>
+          <div class="pub-form-group">
+            <label>Email Address *</label>
+            <input type="email" id="gEmail" class="pub-input" placeholder="your@email.com"/>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="pub-form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="gPhone" class="pub-input" placeholder="+1 (555) 000-0000"/>
+          </div>
+          <div class="pub-form-group">
+            <label>ID Proof Type</label>
+            <select id="gIDType" class="pub-input">
+              <option value="">Select type</option>
+              <option value="passport">Passport</option>
+              <option value="driver_license">Driver License</option>
+              <option value="national_id">National ID</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="pub-form-group">
+            <label>ID Number</label>
+            <input type="text" id="gIDNum" class="pub-input" placeholder="ID/Passport number"/>
+          </div>
+          <div class="pub-form-group">
+            <label>Address</label>
+            <input type="text" id="gAddr" class="pub-input" placeholder="Your home address"/>
+          </div>
+        </div>
+        <div class="pub-form-group">
+          <label>Special Requests</label>
+          <textarea id="gSpecial" class="pub-textarea" placeholder="Any special requests or requirements..."></textarea>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button class="btn-back" onclick="goBack()">Back</button>
+        <button class="btn-gold-lg" onclick="proceedToConfirm()">Review Booking</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Review & Confirm -->
+    <div class="booking-step" id="step3" style="display:none">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <h2 class="step-title">Review & Confirm</h2>
+      </div>
+      <div id="bookingSummary"></div>
+      <div id="bookingError" class="booking-error" style="display:none"></div>
+      <div class="step-actions">
+        <button class="btn-back" onclick="goBack2()">Back</button>
+        <button class="btn-gold-lg" id="confirmBtn" onclick="confirmBooking()">Confirm Booking</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="pub-footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="nav-brand-icon">✦</span><span class="footer-name">Grand Azure Hotel</span></div>
+    <div class="footer-links"><a href="/">Home</a><a href="/rooms">Rooms</a><a href="/lookup">My Booking</a></div>
+    <p class="footer-copy">© 2024 Grand Azure Hotel. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const params  = new URLSearchParams(window.location.search);
+  const today   = new Date();
+  const tmr     = new Date(today); tmr.setDate(tmr.getDate() + 1);
+  const fmt     = d => d.toISOString().split('T')[0];
+  const icons   = { Standard: '🛏', Deluxe: '🌟', Suite: '👑', Presidential: '💎' };
+
+  document.getElementById('bCI').value = params.get('check_in')  || fmt(today);
+  document.getElementById('bCO').value = params.get('check_out') || fmt(tmr);
+  document.getElementById('bCI').min   = fmt(today);
+  document.getElementById('bCO').min   = fmt(tmr);
+
+  let selectedRoom = null;
+
+  async function searchAvailable() {
+    const ci = document.getElementById('bCI').value;
+    const co = document.getElementById('bCO').value;
+    if (!ci || !co) { alert('Please select check-in and check-out dates'); return; }
+
+    const res   = await fetch(`/api/rooms?check_in=${ci}&check_out=${co}`);
+    const rooms = await res.json();
+    const div   = document.getElementById('availableRooms');
+    const nights = Math.max(1, (new Date(co) - new Date(ci)) / 86400000);
+
+    if (!rooms.length) {
+      div.innerHTML = '<div class="no-rooms"><div class="no-rooms-icon">😔</div><h3>No rooms available for these dates</h3><p>Please try different dates</p></div>';
+      return;
+    }
+
+    div.innerHTML = '<h3 style="color:#D4A853;margin-bottom:16px;font-family:var(--serif)">' + rooms.length + ' rooms available</h3>' +
+      rooms.map(r => `
+        <div class="avail-room-card ${selectedRoom && selectedRoom.room_id === r.room_id ? 'selected' : ''}" onclick="selectRoom(${JSON.stringify(r).replace(/"/g,'&quot;')}, this)">
+          <div class="arc-icon">${icons[r.room_type] || '🛏'}</div>
+          <div class="arc-info">
+            <div class="arc-title">Room ${r.room_number} — ${r.room_type}</div>
+            <div class="arc-detail">Floor ${r.floor} · Max ${r.max_occupancy} guests</div>
+            <div class="arc-amenities">${(r.amenities||'').split(',').slice(0,3).map(a=>`<span>${a.trim()}</span>`).join('')}</div>
+          </div>
+          <div class="arc-price-col">
+            <div class="arc-price">$${parseFloat(r.price_per_night).toFixed(0)}/night</div>
+            <div class="arc-total">$${(parseFloat(r.price_per_night)*nights).toFixed(0)} total</div>
+            <button class="arc-select-btn">Select</button>
+          </div>
+        </div>`).join('');
+
+    // Auto-select if room_id in URL
+    if (params.get('room_id')) {
+      const r = rooms.find(x => x.room_id == params.get('room_id'));
+      if (r) {
+        const card = div.querySelector('.avail-room-card');
+        if (card) selectRoom(r, card);
+      }
+    }
+  }
+
+  function selectRoom(room, el) {
+    selectedRoom = room;
+    document.querySelectorAll('.avail-room-card').forEach(c => c.classList.remove('selected'));
+    el.closest('.avail-room-card').classList.add('selected');
+
+    const ci = document.getElementById('bCI').value;
+    const co = document.getElementById('bCO').value;
+    const nights = Math.max(1, (new Date(co) - new Date(ci)) / 86400000);
+
+    document.getElementById('selectedRoomSummary').innerHTML = `
+      <div class="room-summary-box">
+        <div class="rsb-icon">${icons[room.room_type] || '🛏'}</div>
+        <div class="rsb-info">
+          <div class="rsb-title">Room ${room.room_number} — ${room.room_type}</div>
+          <div class="rsb-dates">${ci} to ${co} · ${nights} night${nights>1?'s':''}</div>
+        </div>
+        <div class="rsb-price">$${(parseFloat(room.price_per_night)*nights).toFixed(2)}</div>
+      </div>`;
+
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goBack()  { document.getElementById('step2').style.display='none'; document.getElementById('step1').style.display='block'; }
+  function goBack2() { document.getElementById('step3').style.display='none'; document.getElementById('step2').style.display='block'; }
+
+  function proceedToConfirm() {
+    const name  = document.getElementById('gName').value.trim();
+    const email = document.getElementById('gEmail').value.trim();
+    const phone = document.getElementById('gPhone').value.trim();
+    if (!name || !email || !phone) { alert('Please fill in your name, email and phone number'); return; }
+
+    const ci     = document.getElementById('bCI').value;
+    const co     = document.getElementById('bCO').value;
+    const nights = Math.max(1, (new Date(co) - new Date(ci)) / 86400000);
+    const tax    = parseFloat(selectedRoom.price_per_night) * nights * 0.12;
+    const sub    = parseFloat(selectedRoom.price_per_night) * nights;
+    const total  = sub + tax;
+
+    document.getElementById('bookingSummary').innerHTML = `
+      <div class="booking-review">
+        <div class="review-section">
+          <h4>Room Details</h4>
+          <div class="review-row"><span>Room</span><span>Room ${selectedRoom.room_number} — ${selectedRoom.room_type}</span></div>
+          <div class="review-row"><span>Check In</span><span>${ci}</span></div>
+          <div class="review-row"><span>Check Out</span><span>${co}</span></div>
+          <div class="review-row"><span>Duration</span><span>${nights} night${nights>1?'s':''}</span></div>
+          <div class="review-row"><span>Guests</span><span>${document.getElementById('bAdults').value} adult(s), ${document.getElementById('bChildren').value} child(ren)</span></div>
+        </div>
+        <div class="review-section">
+          <h4>Guest Details</h4>
+          <div class="review-row"><span>Name</span><span>${name}</span></div>
+          <div class="review-row"><span>Email</span><span>${email}</span></div>
+          <div class="review-row"><span>Phone</span><span>${phone}</span></div>
+        </div>
+        <div class="review-section">
+          <h4>Price Breakdown</h4>
+          <div class="review-row"><span>Room ($${parseFloat(selectedRoom.price_per_night).toFixed(2)} x ${nights} nights)</span><span>$${sub.toFixed(2)}</span></div>
+          <div class="review-row"><span>Tax (12%)</span><span>$${tax.toFixed(2)}</span></div>
+          <div class="review-row review-total"><span>Total</span><span>$${total.toFixed(2)}</span></div>
+        </div>
+        ${document.getElementById('gSpecial').value ? `<div class="review-section"><h4>Special Requests</h4><p style="color:#8FA3B8">${document.getElementById('gSpecial').value}</p></div>` : ''}
+      </div>`;
+
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('step3').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  async function confirmBooking() {
+    const btn = document.getElementById('confirmBtn');
+    btn.textContent = 'Processing...';
+    btn.disabled = true;
+
+    const payload = {
+      room_id:         selectedRoom.room_id,
+      check_in_date:   document.getElementById('bCI').value,
+      check_out_date:  document.getElementById('bCO').value,
+      adults:          parseInt(document.getElementById('bAdults').value),
+      children:        parseInt(document.getElementById('bChildren').value),
+      name:            document.getElementById('gName').value.trim(),
+      email:           document.getElementById('gEmail').value.trim(),
+      phone:           document.getElementById('gPhone').value.trim(),
+      address:         document.getElementById('gAddr').value.trim(),
+      id_proof_type:   document.getElementById('gIDType').value,
+      id_proof_number: document.getElementById('gIDNum').value.trim(),
+      special_requests: document.getElementById('gSpecial').value.trim()
+    };
+
+    try {
+      const res  = await fetch('/api/book', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (data.success) {
+        window.location.href = `/confirmation/${data.reservation_id}`;
+      } else {
+        document.getElementById('bookingError').textContent = data.error || 'Booking failed';
+        document.getElementById('bookingError').style.display = 'block';
+        btn.textContent = 'Confirm Booking';
+        btn.disabled = false;
+      }
+    } catch (e) {
+      document.getElementById('bookingError').textContent = 'Something went wrong. Please try again.';
+      document.getElementById('bookingError').style.display = 'block';
+      btn.textContent = 'Confirm Booking';
+      btn.disabled = false;
+    }
+  }
+
+  function toggleMobileNav() { document.getElementById('navMobile').classList.toggle('open'); }
+  searchAvailable();
+</script>
+</body>
+</html>

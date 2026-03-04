@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Grand Azure Hotel{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">✦</div>
+        <div class="brand-text">
+          <span class="brand-name">Grand Azure</span>
+          <span class="brand-sub">Hotel Management</span>
+        </div>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item {% if request.endpoint and 'dashboard' in request.endpoint %}active{% endif %}">
+          <a href="{{ url_for('dashboard.index') }}" class="nav-link">
+            <span class="nav-icon">⊞</span><span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item {% if request.endpoint and 'guests' in request.endpoint %}active{% endif %}">
+          <a href="{{ url_for('guests.index') }}" class="nav-link">
+            <span class="nav-icon">👤</span><span>Guests</span>
+          </a>
+        </li>
+        <li class="nav-item {% if request.endpoint and 'rooms' in request.endpoint %}active{% endif %}">
+          <a href="{{ url_for('rooms.index') }}" class="nav-link">
+            <span class="nav-icon">🛏</span><span>Rooms</span>
+          </a>
+        </li>
+        <li class="nav-item {% if request.endpoint and 'reservations' in request.endpoint %}active{% endif %}">
+          <a href="{{ url_for('reservations.index') }}" class="nav-link">
+            <span class="nav-icon">📅</span><span>Reservations</span>
+          </a>
+        </li>
+        <li class="nav-item {% if request.endpoint and 'services' in request.endpoint %}active{% endif %}">
+          <a href="{{ url_for('services.index') }}" class="nav-link">
+            <span class="nav-icon">🍽</span><span>Services</span>
+          </a>
+        </li>
+        <li class="nav-item {% if request.endpoint and 'staff' in request.endpoint %}active{% endif %}">
+          <a href="{{ url_for('staff.index') }}" class="nav-link">
+            <span class="nav-icon">👥</span><span>Staff</span>
+          </a>
+        </li>
+        <li class="nav-item {% if request.endpoint and 'reports' in request.endpoint %}active{% endif %}">
+          <a href="{{ url_for('reports.index') }}" class="nav-link">
+            <span class="nav-icon">📊</span><span>Reports</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar">{{ current_user.name[0] }}</div>
+          <div>
+            <div class="user-name">{{ current_user.name }}</div>
+            <div class="user-role">{{ current_user.role | title }}</div>
+          </div>
+        </div>
+        <a href="{{ url_for('auth.logout') }}" class="logout-btn" title="Logout">⏻</a>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <div class="topbar-title">{% block page_title %}{% endblock %}</div>
+        <div class="topbar-right">
+          <span class="topbar-date" id="live-date"></span>
+        </div>
+      </header>
+
+      <div class="page-body">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for cat, msg in messages %}
+              <div class="alert alert-{{ cat }}">{{ msg }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+  <div class="modal" id="mainModal">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer" id="modalFooter"></div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

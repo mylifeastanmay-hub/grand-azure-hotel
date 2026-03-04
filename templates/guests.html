@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Guests — Grand Azure{% endblock %}
+{% block page_title %}Guest Management{% endblock %}
+
+{% block content %}
+<div class="page-actions">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchGuests" class="search-input" placeholder="Search by name, email, phone…" oninput="searchGuests(this.value)"/>
+  </div>
+  <button class="btn btn-primary" onclick="openAddGuest()">+ Add Guest</button>
+</div>
+
+<div class="card">
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>ID Proof</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="guestsBody">
+        <tr><td colspan="6" class="table-empty">Loading guests…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/guests.js') }}"></script>
+{% endblock %}

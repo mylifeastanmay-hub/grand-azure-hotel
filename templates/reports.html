@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Reports — Grand Azure{% endblock %}
+{% block page_title %}Reports & Analytics{% endblock %}
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+{% endblock %}
+{% block content %}
+<!-- Summary Cards -->
+<div class="stats-row" id="summaryRow">
+  <div class="stat-card stat-blue"><div class="stat-icon">💰</div><div class="stat-value" id="rpt-monthly">—</div><div class="stat-label">Monthly Revenue</div></div>
+  <div class="stat-card stat-gold"><div class="stat-icon">📈</div><div class="stat-value" id="rpt-annual">—</div><div class="stat-label">Annual Revenue</div></div>
+  <div class="stat-card stat-green"><div class="stat-icon">📅</div><div class="stat-value" id="rpt-bookings">—</div><div class="stat-label">Monthly Bookings</div></div>
+  <div class="stat-card stat-purple"><div class="stat-icon">🌙</div><div class="stat-value" id="rpt-avgstay">—</div><div class="stat-label">Avg Stay (nights)</div></div>
+</div>
+
+<div class="charts-row">
+  <div class="card chart-card">
+    <div class="card-header">
+      <h3 class="card-title">Revenue</h3>
+      <div class="btn-group">
+        <button class="btn btn-sm btn-outline active" onclick="loadRevenue('daily', this)">Daily</button>
+        <button class="btn btn-sm btn-outline" onclick="loadRevenue('monthly', this)">Monthly</button>
+      </div>
+    </div>
+    <div class="chart-container"><canvas id="revChart"></canvas></div>
+  </div>
+  <div class="card chart-card">
+    <div class="card-header"><h3 class="card-title">Occupancy — Last 30 Days</h3></div>
+    <div class="chart-container"><canvas id="occChart"></canvas></div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/reports.js') }}"></script>{% endblock %}
