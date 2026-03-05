@@ -10,5 +10,4 @@ marshmallow==3.20.1
 APScheduler==3.10.4
 Pillow==10.4.0
 pytz==2023.3
-psycopg2-binary==2.9.9
 gunicorn==21.2.0
