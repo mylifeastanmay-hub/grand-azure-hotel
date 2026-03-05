@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Booking Confirmed — Grand Azure Hotel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&family=Cormorant:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/static/css/public.css"/>
 </head>
 <body>
@@ -13,73 +13,47 @@
 <nav class="pub-nav scrolled">
   <div class="nav-inner">
     <a href="/" class="nav-brand">
-      <div class="nav-logo-mark"><span>✦</span></div>
-      <div class="nav-brand-text">
-        <span class="nav-brand-main">Grand Azure</span>
-        <span class="nav-brand-sub">Luxury Hotel</span>
-      </div>
+      <span class="nav-brand-icon">✦</span>
+      <span class="nav-brand-name">Grand Azure</span>
     </a>
     <div class="nav-links">
       <a href="/">Home</a>
-      <a href="/rooms">Rooms & Suites</a>
+      <a href="/rooms">Rooms</a>
       <a href="/lookup">My Booking</a>
-      <a href="/book" class="nav-cta">Reserve Now</a>
+      <a href="/book" class="nav-cta">Book Now</a>
     </div>
   </div>
 </nav>
 
-<section class="confirmation-section" style="background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.06) 0%,transparent 60%),var(--obsidian)">
+<section class="confirmation-section">
   <div class="confirmation-box">
     <div class="confirm-icon">✦</div>
-    <p style="font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Reservation Confirmed</p>
-    <h1 class="confirm-title">Thank You,<br/><em style="font-style:italic;color:var(--gold)">{{ reservation.guest.name.split()[0] }}</em></h1>
-    <p class="confirm-sub">Your reservation at Grand Azure Hotel has been confirmed. We look forward to welcoming you.</p>
+    <h1 class="confirm-title">Booking Confirmed!</h1>
+    <p class="confirm-sub">Thank you for choosing Grand Azure Hotel. Your reservation is confirmed.</p>
 
     <div class="confirm-ref">
       Reservation #<strong>{{ reservation.reservation_id }}</strong>
     </div>
 
     <div class="confirm-details">
-      <div class="cd-row">
-        <span>Guest</span>
-        <strong>{{ reservation.guest.name }}</strong>
-      </div>
-      <div class="cd-row">
-        <span>Email</span>
-        <strong>{{ reservation.guest.email }}</strong>
-      </div>
-      <div class="cd-row">
-        <span>Room</span>
-        <strong>Room {{ reservation.room.room_number }} — {{ reservation.room.room_type }}</strong>
-      </div>
-      <div class="cd-row">
-        <span>Check In</span>
-        <strong>{{ reservation.check_in_date.strftime('%A, %B %d, %Y') }}</strong>
-      </div>
-      <div class="cd-row">
-        <span>Check Out</span>
-        <strong>{{ reservation.check_out_date.strftime('%A, %B %d, %Y') }}</strong>
-      </div>
-      <div class="cd-row">
-        <span>Guests</span>
-        <strong>{{ reservation.adults }} adult{{ 's' if reservation.adults > 1 else '' }}{% if reservation.children > 0 %}, {{ reservation.children }} child{{ 'ren' if reservation.children > 1 else '' }}{% endif %}</strong>
-      </div>
-      <div class="cd-row cd-total">
-        <span>Total Amount</span>
-        <strong>${{ "%.2f"|format(reservation.total_price) }}</strong>
-      </div>
+      <div class="cd-row"><span>Guest</span><strong>{{ reservation.guest.name }}</strong></div>
+      <div class="cd-row"><span>Email</span><strong>{{ reservation.guest.email }}</strong></div>
+      <div class="cd-row"><span>Room</span><strong>{{ reservation.room.room_number }} — {{ reservation.room.room_type }}</strong></div>
+      <div class="cd-row"><span>Check In</span><strong>{{ reservation.check_in_date.strftime('%B %d, %Y') }}</strong></div>
+      <div class="cd-row"><span>Check Out</span><strong>{{ reservation.check_out_date.strftime('%B %d, %Y') }}</strong></div>
+      <div class="cd-row"><span>Guests</span><strong>{{ reservation.adults }} adult(s){% if reservation.children > 0 %}, {{ reservation.children }} child(ren){% endif %}</strong></div>
+      <div class="cd-row cd-total"><span>Total Amount</span><strong>${{ "%.2f"|format(reservation.total_price) }}</strong></div>
     </div>
 
     {% if reservation.special_requests %}
     <div class="confirm-special">
-      <strong style="color:var(--gold);font-size:10px;letter-spacing:0.2em;text-transform:uppercase">Special Requests</strong>
-      <p style="margin-top:8px">{{ reservation.special_requests }}</p>
+      <strong>Special Requests:</strong> {{ reservation.special_requests }}
     </div>
     {% endif %}
 
     <div class="confirm-notice">
-      <p>Please save your reservation number <strong style="color:var(--gold)">#{{ reservation.reservation_id }}</strong>. You can use it with your email to look up your booking at any time.</p>
-      <p style="margin-top:8px">Check-in is from <strong>3:00 PM</strong>. Early check-in is subject to availability — please contact us in advance.</p>
+      <p>Please save your reservation number <strong>#{{ reservation.reservation_id }}</strong>.</p>
+      <p>You can use it along with your email to look up your booking anytime.</p>
     </div>
 
     <div class="confirm-actions">
@@ -91,9 +65,8 @@
 
 <footer class="pub-footer">
   <div class="footer-inner">
-    <div class="footer-bottom" style="padding-top:0;border:none">
-      <p class="footer-copy">© 2024 Grand Azure Hotel · 1 Harbor Boulevard, Miami FL · +1 (305) 555-0100</p>
-    </div>
+    <div class="footer-brand"><span class="nav-brand-icon">✦</span><span class="footer-name">Grand Azure Hotel</span></div>
+    <p class="footer-copy">© 2024 Grand Azure Hotel. All rights reserved.</p>
   </div>
 </footer>
 

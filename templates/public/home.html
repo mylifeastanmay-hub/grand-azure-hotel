@@ -4,84 +4,64 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Grand Azure Hotel — Luxury Stays</title>
-  <meta name="description" content="Grand Azure Hotel — Where every stay is a masterpiece of luxury, comfort, and unforgettable moments."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&family=Cormorant:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/static/css/public.css"/>
 </head>
 <body>
 
-<!-- ── NAVIGATION ───────────────────────────────────────── -->
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
 <nav class="pub-nav" id="pubNav">
   <div class="nav-inner">
-    <a href="/" class="nav-brand">
-      <div class="nav-logo-mark"><span>✦</span></div>
-      <div class="nav-brand-text">
-        <span class="nav-brand-main">Grand Azure</span>
-        <span class="nav-brand-sub">Luxury Hotel</span>
-      </div>
+    <a href="/public/" class="nav-brand">
+      <div class="nav-brand-icon">✦</div>
+      <span class="nav-brand-name">Grand Azure</span>
     </a>
     <div class="nav-links">
-      <a href="/" class="active">Home</a>
-      <a href="/rooms">Rooms & Suites</a>
-      <a href="/lookup">My Booking</a>
-      <a href="/book" class="nav-cta">Reserve Now</a>
+      <a href="/public/" class="active">Home</a>
+      <a href="/public/rooms">Rooms</a>
+      <a href="/public/lookup">My Booking</a>
+      <a href="/public/book" class="nav-cta">Book Now</a>
     </div>
     <button class="nav-hamburger" onclick="toggleMobileNav()">☰</button>
   </div>
   <div class="nav-mobile" id="navMobile">
-    <a href="/">Home</a>
-    <a href="/rooms">Rooms & Suites</a>
-    <a href="/lookup">My Booking</a>
-    <a href="/book">Reserve Now</a>
+    <a href="/public/">Home</a>
+    <a href="/public/rooms">Rooms</a>
+    <a href="/public/lookup">My Booking</a>
+    <a href="/public/book">Book Now</a>
   </div>
 </nav>
 
-<!-- ── HERO ─────────────────────────────────────────────── -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-lines"></div>
-
-  <div class="hero-image-panel">
-    <div class="hero-img-placeholder" style="
-      width:100%;height:100%;
-      background: linear-gradient(135deg,
-        rgba(201,168,76,0.08) 0%,
-        rgba(45,130,183,0.06) 30%,
-        rgba(8,10,12,0.95) 100%),
-        repeating-linear-gradient(
-          45deg,
-          rgba(201,168,76,0.03) 0px,
-          rgba(201,168,76,0.03) 1px,
-          transparent 1px,
-          transparent 40px
-        );
-      display:flex;align-items:center;justify-content:center;
-    ">
-      <div style="text-align:center;opacity:0.2">
-        <div style="font-size:160px;line-height:1">🏨</div>
-        <div style="font-family:'Playfair Display',serif;font-size:18px;letter-spacing:0.3em;color:#C9A84C;margin-top:16px">GRAND AZURE</div>
-      </div>
-    </div>
-  </div>
+  <div class="hero-shape hero-shape-1"></div>
+  <div class="hero-shape hero-shape-2"></div>
+  <div class="hero-shape hero-shape-3"></div>
+  <div class="hero-line hero-line-1"></div>
+  <div class="hero-line hero-line-2"></div>
 
   <div class="hero-content">
-    <p class="hero-eyebrow">Welcome to Excellence</p>
-    <h1 class="hero-title">
-      Grand Azure<br/>
-      <em>Hotel & Spa</em>
-    </h1>
-    <p class="hero-sub">Where every detail is a testament to refined luxury. Experience the art of exceptional hospitality in the heart of the city.</p>
+    <p class="hero-eyebrow">Welcome to</p>
+    <h1 class="hero-title">Grand Azure<em>Hotel</em></h1>
+    <p class="hero-sub">Where every stay becomes a masterpiece of luxury, comfort, and unforgettable moments.</p>
 
-    <div class="hero-search">
+    <div class="hero-search" id="heroSearch">
       <div class="search-field">
         <label>Check In</label>
         <input type="date" id="heroCI"/>
       </div>
+      <div class="search-divider"></div>
       <div class="search-field">
         <label>Check Out</label>
         <input type="date" id="heroCO"/>
       </div>
+      <div class="search-divider"></div>
       <div class="search-field">
         <label>Room Type</label>
         <select id="heroType">
@@ -97,247 +77,142 @@
   </div>
 
   <div class="hero-scroll">
+    <div class="scroll-dot"></div>
     <span>Scroll to explore</span>
-    <div class="scroll-line"></div>
-  </div>
-
-  <!-- Rotating badge -->
-  <div class="hero-badge">
-    <svg viewBox="0 0 100 100">
-      <defs>
-        <path id="circle" d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"/>
-      </defs>
-      <text font-size="9" font-family="Jost,sans-serif" fill="#C9A84C" letter-spacing="4" font-weight="300">
-        <textPath href="#circle">LUXURY · SINCE 2019 · GRAND AZURE · </textPath>
-      </text>
-      <text x="50" y="54" text-anchor="middle" font-size="16" fill="#C9A84C">✦</text>
-    </svg>
   </div>
 </section>
 
-<!-- ── MARQUEE ───────────────────────────────────────────── -->
-<div class="marquee-bar">
-  <div class="marquee-track">
-    <span class="marquee-item">Five-Star Luxury</span>
-    <span class="marquee-item">Award-Winning Spa</span>
-    <span class="marquee-item">Fine Dining</span>
-    <span class="marquee-item">24/7 Concierge</span>
-    <span class="marquee-item">Airport Transfer</span>
-    <span class="marquee-item">Pool & Wellness</span>
-    <span class="marquee-item">Business Center</span>
-    <span class="marquee-item">Presidential Suite</span>
-    <!-- repeat for seamless loop -->
-    <span class="marquee-item">Five-Star Luxury</span>
-    <span class="marquee-item">Award-Winning Spa</span>
-    <span class="marquee-item">Fine Dining</span>
-    <span class="marquee-item">24/7 Concierge</span>
-    <span class="marquee-item">Airport Transfer</span>
-    <span class="marquee-item">Pool & Wellness</span>
-    <span class="marquee-item">Business Center</span>
-    <span class="marquee-item">Presidential Suite</span>
-  </div>
-</div>
-
-<!-- ── STATS ─────────────────────────────────────────────── -->
+<!-- STATS -->
 <section class="stats-bar">
   <div class="stats-inner">
-    <div class="stat-item">
-      <div class="stat-num" id="statRooms">—</div>
-      <div class="stat-lbl">Rooms & Suites</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">5★</div>
-      <div class="stat-lbl">Luxury Rating</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">24/7</div>
-      <div class="stat-lbl">Concierge Service</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">100%</div>
-      <div class="stat-lbl">Satisfaction Guaranteed</div>
-    </div>
+    <div class="stat-item reveal"><div class="stat-num">10<span>+</span></div><div class="stat-lbl">Room Categories</div></div>
+    <div class="stat-item reveal reveal-delay-1"><div class="stat-num">5<span>★</span></div><div class="stat-lbl">Guest Rating</div></div>
+    <div class="stat-item reveal reveal-delay-2"><div class="stat-num">24<span>/7</span></div><div class="stat-lbl">Concierge Service</div></div>
+    <div class="stat-item reveal reveal-delay-3"><div class="stat-num">100<span>%</span></div><div class="stat-lbl">Satisfaction</div></div>
   </div>
 </section>
 
-<!-- ── ROOMS PREVIEW ─────────────────────────────────────── -->
+<!-- ROOMS PREVIEW -->
 <section class="section">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <p class="section-eyebrow">Accommodations</p>
-      <h2 class="section-title">Our Finest Rooms & Suites</h2>
-      <p class="section-sub">Each space is thoughtfully designed to deliver an exceptional, personalised experience</p>
+      <h2 class="section-title">Our Finest <em>Rooms</em></h2>
+      <p class="section-sub">Each room is thoughtfully designed to deliver an exceptional experience</p>
     </div>
     <div class="rooms-preview-grid" id="roomsPreview">
-      <div class="rooms-loading">Curating your experience…</div>
+      <div class="rooms-loading">Loading rooms...</div>
     </div>
-    <div class="section-action">
-      <a href="/rooms" class="btn-outline-gold">View All Rooms</a>
+    <div class="section-action reveal">
+      <a href="/public/rooms" class="btn-outline-gold">View All Rooms</a>
     </div>
   </div>
 </section>
 
-<!-- ── EXPERIENCE SPLIT ──────────────────────────────────── -->
-<div class="split-section">
-  <div class="split-visual" style="background:linear-gradient(135deg,#0D1117,#161E28)">
-    <div class="split-bg-icon">🌊</div>
-    <div class="split-visual-inner">
-      <div class="split-number">10+</div>
-      <div class="split-label">Years of Excellence</div>
-    </div>
-  </div>
-  <div class="split-content">
-    <p class="eyebrow" style="margin-bottom:20px">The Grand Azure Experience</p>
-    <h2>Luxury Redefined for the Modern Traveller</h2>
-    <p>Nestled in the heart of the city, Grand Azure Hotel offers an unparalleled sanctuary of refined elegance. Every corner of our property has been curated with meticulous attention to detail.</p>
-    <p>From our award-winning spa to our rooftop pool and Michelin-starred restaurant, every element of your stay has been crafted to exceed your highest expectations.</p>
-    <div class="split-features">
-      <div class="split-feat">Personalised butler service for suite guests</div>
-      <div class="split-feat">In-room dining available 24 hours a day</div>
-      <div class="split-feat">Complimentary premium minibar and WiFi</div>
-      <div class="split-feat">Exclusive access to members' spa lounge</div>
-    </div>
-  </div>
-</div>
-
-<!-- ── AMENITIES ─────────────────────────────────────────── -->
-<section class="section section-dark">
+<!-- AMENITIES -->
+<section class="section section-warm">
   <div class="container">
-    <div class="section-header">
-      <p class="section-eyebrow">Hotel Amenities</p>
-      <h2 class="section-title">World-Class Facilities</h2>
-      <p class="section-sub">Every amenity curated for your utmost comfort and indulgence</p>
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Experience</p>
+      <h2 class="section-title">World-Class <em>Amenities</em></h2>
+      <p class="section-sub">Every detail curated for your perfect stay</p>
     </div>
     <div class="amenities-grid">
-      <div class="amenity-card">
-        <span class="amenity-icon">🍽</span>
-        <h3>The Azure Restaurant</h3>
-        <p>Award-winning cuisine crafted by our executive chef. From continental breakfast to five-course dinners, every meal is an event.</p>
-      </div>
-      <div class="amenity-card">
-        <span class="amenity-icon">💆</span>
-        <h3>Serenity Spa & Wellness</h3>
-        <p>Immerse yourself in total relaxation. Our spa offers bespoke treatments, couples' massages, and a full hydrotherapy suite.</p>
-      </div>
-      <div class="amenity-card">
-        <span class="amenity-icon">🏊</span>
-        <h3>Rooftop Infinity Pool</h3>
-        <p>Our stunning rooftop pool offers panoramic city views. Complimentary towels, poolside cocktail service, and private cabanas.</p>
-      </div>
-      <div class="amenity-card">
-        <span class="amenity-icon">🚗</span>
-        <h3>Chauffeur & Transfers</h3>
-        <p>Seamless door-to-door transfers in our fleet of luxury vehicles. Available 24/7 for airport pickups and private excursions.</p>
-      </div>
-      <div class="amenity-card">
-        <span class="amenity-icon">💼</span>
-        <h3>Executive Business Centre</h3>
-        <p>State-of-the-art meeting rooms, private boardrooms, and a fully equipped business lounge for the discerning professional.</p>
-      </div>
-      <div class="amenity-card">
-        <span class="amenity-icon">🛎</span>
-        <h3>24/7 Concierge</h3>
-        <p>Our expert concierge team is on hand around the clock to arrange reservations, experiences, and any request imaginable.</p>
-      </div>
+      <div class="amenity-card reveal"><span class="amenity-icon">🍽</span><h3>Fine Dining</h3><p>Exquisite cuisine crafted by award-winning chefs, available in-room or at our restaurant.</p></div>
+      <div class="amenity-card reveal reveal-delay-1"><span class="amenity-icon">💆</span><h3>Spa & Wellness</h3><p>Rejuvenate your body and mind with our full-service spa and wellness treatments.</p></div>
+      <div class="amenity-card reveal reveal-delay-2"><span class="amenity-icon">🏊</span><h3>Swimming Pool</h3><p>Dive into our stunning pool with panoramic views, open all day for guests.</p></div>
+      <div class="amenity-card reveal"><span class="amenity-icon">🚗</span><h3>Airport Transfer</h3><p>Seamless private transfers in luxury vehicles at your convenience.</p></div>
+      <div class="amenity-card reveal reveal-delay-1"><span class="amenity-icon">📶</span><h3>High-Speed WiFi</h3><p>Stay connected with complimentary high-speed internet throughout the property.</p></div>
+      <div class="amenity-card reveal reveal-delay-2"><span class="amenity-icon">🛎</span><h3>24/7 Concierge</h3><p>Our dedicated team available around the clock to fulfill your every request.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ── TESTIMONIALS ──────────────────────────────────────── -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <p class="section-eyebrow">Guest Stories</p>
-      <h2 class="section-title">What Our Guests Say</h2>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-text">An extraordinary experience from check-in to check-out. The staff anticipated our every need before we even asked. The Presidential Suite was beyond anything we'd imagined.</p>
-        <div class="test-author">Alexandra & James Morrison</div>
-        <div class="test-location">New York, USA</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-text">The Serenity Spa is worth the trip alone. I've stayed in luxury hotels across four continents and Grand Azure stands in a class of its own. Simply magnificent.</p>
-        <div class="test-author">Hiroshi Tanaka</div>
-        <div class="test-location">Tokyo, Japan</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-text">Our anniversary dinner at The Azure Restaurant was unforgettable. The sommelier's wine pairing was inspired. We will absolutely return — probably for our anniversary every year.</p>
-        <div class="test-author">Sophie & Marc Dubois</div>
-        <div class="test-location">Paris, France</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── CTA ───────────────────────────────────────────────── -->
+<!-- CTA -->
 <section class="cta-section">
-  <div class="cta-inner">
-    <p class="eyebrow" style="margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:16px">
-      <span style="width:40px;height:1px;background:var(--gold-dim);display:inline-block"></span>
-      Book Direct
-      <span style="width:40px;height:1px;background:var(--gold-dim);display:inline-block"></span>
-    </p>
-    <h2 class="cta-title">Begin Your Grand Azure Journey</h2>
-    <p class="cta-sub">Book directly for the best rates, complimentary breakfast, and exclusive guest privileges</p>
-    <a href="/book" class="btn-gold-lg">Reserve Your Suite</a>
+  <div class="reveal">
+    <h2 class="cta-title">Ready for an <em>Unforgettable</em> Stay?</h2>
+    <p class="cta-sub">Book directly for the best rates and exclusive benefits</p>
+    <a href="/public/book" class="btn-gold-lg">Reserve Your Room</a>
   </div>
 </section>
 
-<!-- ── FOOTER ────────────────────────────────────────────── -->
+<!-- FOOTER -->
 <footer class="pub-footer">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand-col">
-        <div class="nav-brand" style="margin-bottom:0">
-          <div class="nav-logo-mark"><span>✦</span></div>
-          <div class="nav-brand-text">
-            <span class="nav-brand-main">Grand Azure</span>
-            <span class="nav-brand-sub">Luxury Hotel</span>
-          </div>
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="nav-brand-icon" style="width:28px;height:28px;font-size:12px">✦</div>
+          <span class="footer-name">Grand Azure Hotel</span>
         </div>
-        <p class="footer-tagline">Where every stay is a masterpiece of luxury, comfort, and unforgettable moments.</p>
+        <p class="footer-tagline">Where luxury meets comfort in every unforgettable moment.</p>
       </div>
-      <div class="footer-col">
+      <div class="footer-links-group">
         <h4>Navigate</h4>
-        <a href="/">Home</a>
-        <a href="/rooms">Rooms & Suites</a>
-        <a href="/book">Reserve Now</a>
-        <a href="/lookup">My Booking</a>
-        <a href="/auth/login">Staff Login</a>
+        <a href="/public/">Home</a>
+        <a href="/public/rooms">Rooms</a>
+        <a href="/public/book">Book Now</a>
+        <a href="/public/lookup">My Booking</a>
       </div>
-      <div class="footer-col">
-        <h4>Experiences</h4>
-        <a href="#">The Azure Restaurant</a>
-        <a href="#">Serenity Spa</a>
-        <a href="#">Rooftop Pool</a>
-        <a href="#">Business Centre</a>
-        <a href="#">Airport Transfer</a>
-      </div>
-      <div class="footer-col">
+      <div class="footer-links-group">
         <h4>Contact</h4>
-        <p>1 Harbor Boulevard<br/>Miami, FL 33101</p>
-        <p style="margin-top:12px">+1 (305) 555-0100<br/>info@grandazure.com</p>
-        <p style="margin-top:12px">www.grandazure.com</p>
+        <a href="#">+1 (305) 555-0100</a>
+        <a href="#">info@grandazure.com</a>
+        <a href="#">1 Harbor Boulevard, Miami</a>
+      </div>
+      <div class="footer-links-group">
+        <h4>Staff</h4>
+        <a href="/auth/login">Staff Login</a>
+        <a href="/admin">Admin Panel</a>
       </div>
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">© 2024 Grand Azure Hotel. All rights reserved.</p>
-      <div class="footer-social">
-        <a href="#" title="Instagram">◈</a>
-        <a href="#" title="Facebook">◉</a>
-        <a href="#" title="Twitter">◇</a>
-        <a href="#" title="LinkedIn">◆</a>
-      </div>
+      <div style="width:40px;height:1px;background:rgba(184,144,42,0.3)"></div>
     </div>
   </div>
 </footer>
 
 <script>
-  // ── Dates ──
+  // Custom Cursor
+  const cursor     = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top  = mouseY + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top  = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, input, select').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); cursorRing.classList.add('hover'); });
+    el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); cursorRing.classList.remove('hover'); });
+  });
+
+  // 3D tilt on search card
+  const searchCard = document.getElementById('heroSearch');
+  searchCard.addEventListener('mousemove', e => {
+    const rect = searchCard.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width  - 0.5;
+    const y = (e.clientY - rect.top)  / rect.height - 0.5;
+    searchCard.style.transform = `translateY(-4px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
+  });
+  searchCard.addEventListener('mouseleave', () => {
+    searchCard.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+  });
+
+  // Dates
   const today = new Date();
   const tmr   = new Date(today); tmr.setDate(tmr.getDate() + 1);
   const fmt   = d => d.toISOString().split('T')[0];
@@ -346,60 +221,63 @@
   document.getElementById('heroCI').min   = fmt(today);
   document.getElementById('heroCO').min   = fmt(tmr);
 
-  // ── Nav scroll ──
+  function heroSearch() {
+    const ci   = document.getElementById('heroCI').value;
+    const co   = document.getElementById('heroCO').value;
+    const type = document.getElementById('heroType').value;
+    let url = `/public/rooms?check_in=${ci}&check_out=${co}`;
+    if (type) url += `&room_type=${type}`;
+    window.location.href = url;
+  }
+
+  // Nav scroll
   window.addEventListener('scroll', () => {
-    document.getElementById('pubNav').classList.toggle('scrolled', window.scrollY > 60);
+    document.getElementById('pubNav').classList.toggle('scrolled', window.scrollY > 50);
   });
 
   function toggleMobileNav() {
     document.getElementById('navMobile').classList.toggle('open');
   }
 
-  // ── Hero search ──
-  function heroSearch() {
-    const ci   = document.getElementById('heroCI').value;
-    const co   = document.getElementById('heroCO').value;
-    const type = document.getElementById('heroType').value;
-    let url    = `/rooms?check_in=${ci}&check_out=${co}`;
-    if (type) url += `&room_type=${type}`;
-    window.location.href = url;
-  }
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ── Load rooms preview ──
-  const icons  = { Standard:'🛏', Deluxe:'🌟', Suite:'👑', Presidential:'💎' };
-  const colors = { Standard:'#2D82B7', Deluxe:'#C9A84C', Suite:'#8B5CF6', Presidential:'#E05252' };
+  // Load rooms preview
+  const icons  = { Standard: '🛏', Deluxe: '🌟', Suite: '👑', Presidential: '💎' };
 
   async function loadRoomsPreview() {
-    try {
-      const res   = await fetch('/api/rooms');
-      const rooms = await res.json();
-      const grid  = document.getElementById('roomsPreview');
+    const res   = await fetch('/public/api/rooms');
+    const rooms = await res.json();
+    const grid  = document.getElementById('roomsPreview');
 
-      document.getElementById('statRooms').textContent = rooms.length || '10+';
-
-      if (!rooms.length) {
-        grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px">Rooms will appear here once connected to your database.</p>';
-        return;
-      }
-
-      grid.innerHTML = rooms.slice(0, 3).map(r => `
-        <div class="room-preview-card">
-          <div class="rpc-visual" style="background:linear-gradient(135deg,${colors[r.room_type] || '#2D82B7'}18,${colors[r.room_type] || '#2D82B7'}30)">
-            <div class="rpc-big-icon">${icons[r.room_type] || '🛏'}</div>
-          </div>
-          <div class="rpc-body">
-            <div class="rpc-badge">${r.room_type}</div>
-            <h3 class="rpc-name">Room ${r.room_number}</h3>
-            <p class="rpc-desc">${r.description || 'A beautifully appointed room with premium amenities.'}</p>
-            <div class="rpc-footer">
-              <div class="rpc-price">$${parseFloat(r.price_per_night).toFixed(0)}<span>/night</span></div>
-              <a href="/book?room_id=${r.room_id}" class="rpc-btn">Reserve</a>
-            </div>
-          </div>
-        </div>`).join('');
-    } catch(e) {
-      document.getElementById('roomsPreview').innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px">Connect your database to display rooms.</p>';
+    if (!rooms.length) {
+      grid.innerHTML = '<p style="color:var(--warm-gray);grid-column:1/-1;text-align:center;padding:60px">No rooms available right now.</p>';
+      return;
     }
+
+    grid.innerHTML = rooms.slice(0, 3).map((r, i) => `
+      <div class="room-preview-card reveal reveal-delay-${i}">
+        <div class="rpc-header">
+          <div class="rpc-bg"></div>
+          <div class="rpc-icon">${icons[r.room_type] || '🛏'}</div>
+          <div class="rpc-badge">${r.room_type}</div>
+        </div>
+        <div class="rpc-body">
+          <h3 class="rpc-name">Room ${r.room_number}</h3>
+          <p class="rpc-desc">${r.description || 'A beautifully appointed room with premium amenities and stunning views.'}</p>
+          <div class="rpc-amenities">${(r.amenities||'').split(',').slice(0,3).map(a=>`<span>${a.trim()}</span>`).join('')}</div>
+          <div class="rpc-footer">
+            <div class="rpc-price">$${parseFloat(r.price_per_night).toFixed(0)}<span>/night</span></div>
+            <a href="/public/book?room_id=${r.room_id}" class="rpc-btn">Book Now</a>
+          </div>
+        </div>
+      </div>`).join('');
+
+    // Re-observe new cards
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }
 
   loadRoomsPreview();

@@ -3,43 +3,41 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rooms & Suites — Grand Azure Hotel</title>
+  <title>Rooms — Grand Azure Hotel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&family=Cormorant:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/static/css/public.css"/>
 </head>
 <body>
 
 <nav class="pub-nav scrolled" id="pubNav">
   <div class="nav-inner">
-    <a href="/" class="nav-brand">
-      <div class="nav-logo-mark"><span>✦</span></div>
-      <div class="nav-brand-text">
-        <span class="nav-brand-main">Grand Azure</span>
-        <span class="nav-brand-sub">Luxury Hotel</span>
-      </div>
+    <a href="/public/" class="nav-brand">
+      <span class="nav-brand-icon">✦</span>
+      <span class="nav-brand-name">Grand Azure</span>
     </a>
     <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/rooms" class="active">Rooms & Suites</a>
-      <a href="/lookup">My Booking</a>
-      <a href="/book" class="nav-cta">Reserve Now</a>
+      <a href="/public/">Home</a>
+      <a href="/public/rooms" class="active">Rooms</a>
+      <a href="/public/lookup">My Booking</a>
+      <a href="/public/book" class="nav-cta">Book Now</a>
     </div>
     <button class="nav-hamburger" onclick="toggleMobileNav()">☰</button>
   </div>
   <div class="nav-mobile" id="navMobile">
-    <a href="/">Home</a>
-    <a href="/rooms">Rooms & Suites</a>
-    <a href="/lookup">My Booking</a>
-    <a href="/book">Reserve Now</a>
+    <a href="/public/">Home</a>
+    <a href="/public/rooms">Rooms</a>
+    <a href="/public/lookup">My Booking</a>
+    <a href="/public/book">Book Now</a>
   </div>
 </nav>
 
+<!-- PAGE HERO -->
 <section class="page-hero">
   <div class="page-hero-content">
     <p class="hero-eyebrow">Accommodations</p>
-    <h1 class="page-hero-title">Rooms & Suites</h1>
-    <p class="page-hero-sub">Discover your perfect sanctuary — from classic elegance to presidential grandeur</p>
+    <h1 class="page-hero-title">Our Rooms & Suites</h1>
+    <p class="page-hero-sub">Discover the perfect space for your stay</p>
   </div>
 </section>
 
@@ -78,49 +76,23 @@
   </div>
 </section>
 
+<!-- ROOMS GRID -->
 <section class="rooms-section">
   <div class="container">
     <div id="roomsCount" class="rooms-count"></div>
     <div class="rooms-full-grid" id="roomsGrid">
-      <div class="rooms-loading">Curating available rooms…</div>
+      <div class="rooms-loading">Loading available rooms...</div>
     </div>
   </div>
 </section>
 
 <footer class="pub-footer">
   <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand-col">
-        <div class="nav-brand" style="margin-bottom:0">
-          <div class="nav-logo-mark"><span>✦</span></div>
-          <div class="nav-brand-text">
-            <span class="nav-brand-main">Grand Azure</span>
-            <span class="nav-brand-sub">Luxury Hotel</span>
-          </div>
-        </div>
-        <p class="footer-tagline">Where every stay is a masterpiece of luxury, comfort, and unforgettable moments.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navigate</h4>
-        <a href="/">Home</a>
-        <a href="/rooms">Rooms & Suites</a>
-        <a href="/book">Reserve Now</a>
-        <a href="/lookup">My Booking</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>1 Harbor Boulevard<br/>Miami, FL 33101</p>
-        <p style="margin-top:12px">+1 (305) 555-0100</p>
-      </div>
-      <div class="footer-col">
-        <h4>Hours</h4>
-        <p>Check-in: 3:00 PM<br/>Check-out: 11:00 AM</p>
-        <p style="margin-top:12px">Front Desk: 24/7</p>
-      </div>
+    <div class="footer-brand"><span class="nav-brand-icon">✦</span><span class="footer-name">Grand Azure Hotel</span></div>
+    <div class="footer-links">
+      <a href="/public/">Home</a><a href="/public/rooms">Rooms</a><a href="/public/book">Book Now</a><a href="/public/lookup">My Booking</a>
     </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2024 Grand Azure Hotel. All rights reserved.</p>
-    </div>
+    <p class="footer-copy">© 2024 Grand Azure Hotel. All rights reserved.</p>
   </div>
 </footer>
 
@@ -130,51 +102,54 @@
   const tmr    = new Date(today); tmr.setDate(tmr.getDate() + 1);
   const fmt    = d => d.toISOString().split('T')[0];
 
-  document.getElementById('fCI').value = params.get('check_in')  || fmt(today);
-  document.getElementById('fCO').value = params.get('check_out') || fmt(tmr);
-  document.getElementById('fCI').min   = fmt(today);
-  document.getElementById('fCO').min   = fmt(tmr);
+  document.getElementById('fCI').value    = params.get('check_in')   || fmt(today);
+  document.getElementById('fCO').value    = params.get('check_out')  || fmt(tmr);
+  document.getElementById('fCI').min      = fmt(today);
+  document.getElementById('fCO').min      = fmt(tmr);
   if (params.get('room_type')) document.getElementById('fType').value = params.get('room_type');
 
-  const icons  = { Standard:'🛏', Deluxe:'🌟', Suite:'👑', Presidential:'💎' };
-  const colors = { Standard:'#2D82B7', Deluxe:'#C9A84C', Suite:'#8B5CF6', Presidential:'#E05252' };
+  const icons = { Standard: '🛏', Deluxe: '🌟', Suite: '👑', Presidential: '💎' };
+  const colors = { Standard: '#2D82B7', Deluxe: '#D4A853', Suite: '#8B5CF6', Presidential: '#E05252' };
 
   async function searchRooms() {
     const ci    = document.getElementById('fCI').value;
     const co    = document.getElementById('fCO').value;
     const type  = document.getElementById('fType').value;
     const price = document.getElementById('fPrice').value;
+
     let url = `/api/rooms?check_in=${ci}&check_out=${co}`;
     if (type)  url += `&room_type=${type}`;
     if (price) url += `&max_price=${price}`;
 
-    document.getElementById('roomsGrid').innerHTML = '<div class="rooms-loading">Searching…</div>';
-    try {
-      const res   = await fetch(url);
-      const rooms = await res.json();
-      renderRooms(rooms, ci, co);
-    } catch(e) {
-      document.getElementById('roomsGrid').innerHTML = '<div class="no-rooms"><div class="no-rooms-icon">⚠</div><h3>Unable to load rooms</h3><p>Please ensure your server is running</p></div>';
-    }
+    document.getElementById('roomsGrid').innerHTML = '<div class="rooms-loading">Searching...</div>';
+
+    const res   = await fetch(url);
+    const rooms = await res.json();
+    renderRooms(rooms, ci, co);
   }
 
   function renderRooms(rooms, ci, co) {
-    const grid   = document.getElementById('roomsGrid');
-    const count  = document.getElementById('roomsCount');
+    const grid  = document.getElementById('roomsGrid');
+    const count = document.getElementById('roomsCount');
     const nights = ci && co ? Math.max(1, (new Date(co) - new Date(ci)) / 86400000) : 1;
 
-    count.textContent = rooms.length ? `${rooms.length} room${rooms.length > 1 ? 's' : ''} available for your dates` : '';
+    count.textContent = rooms.length ? `${rooms.length} room${rooms.length > 1 ? 's' : ''} available` : '';
 
     if (!rooms.length) {
-      grid.innerHTML = `<div class="no-rooms"><div class="no-rooms-icon">🔍</div><h3>No rooms available</h3><p>Try different dates or room type</p></div>`;
+      grid.innerHTML = `
+        <div class="no-rooms">
+          <div class="no-rooms-icon">🔍</div>
+          <h3>No rooms available</h3>
+          <p>Try different dates or room type</p>
+        </div>`;
       return;
     }
 
     grid.innerHTML = rooms.map(r => `
       <div class="room-full-card">
-        <div class="rfc-visual" style="background:linear-gradient(135deg,${colors[r.room_type]||'#2D82B7'}18,${colors[r.room_type]||'#2D82B7'}35)">
-          <div class="rfc-big-icon">${icons[r.room_type]||'🛏'}</div>
-          <div class="rfc-type-badge" style="background:${colors[r.room_type]||'#2D82B7'}">${r.room_type}</div>
+        <div class="rfc-visual" style="background: linear-gradient(135deg, ${colors[r.room_type] || '#2D82B7'}22, ${colors[r.room_type] || '#2D82B7'}44)">
+          <div class="rfc-big-icon">${icons[r.room_type] || '🛏'}</div>
+          <div class="rfc-type-badge" style="background:${colors[r.room_type] || '#2D82B7'}">${r.room_type}</div>
         </div>
         <div class="rfc-info">
           <div class="rfc-top">
@@ -185,22 +160,29 @@
             <div class="rfc-price-box">
               <div class="rfc-price">$${parseFloat(r.price_per_night).toFixed(0)}</div>
               <div class="rfc-per">per night</div>
-              <div class="rfc-total">$${(parseFloat(r.price_per_night)*nights).toFixed(0)} · ${nights} night${nights>1?'s':''}</div>
+              <div class="rfc-total">$${(parseFloat(r.price_per_night) * nights).toFixed(0)} total</div>
             </div>
           </div>
           <p class="rfc-desc">${r.description || 'A beautifully appointed room with premium amenities and stunning views.'}</p>
           <div class="rfc-amenities">
-            ${(r.amenities||'').split(',').map(a=>`<span class="amenity-tag">${a.trim()}</span>`).join('')}
+            ${(r.amenities || '').split(',').map(a => `<span class="amenity-tag">${a.trim()}</span>`).join('')}
           </div>
           <div class="rfc-actions">
-            <a href="/book?room_id=${r.room_id}&check_in=${ci}&check_out=${co}" class="btn-book">Reserve This Room</a>
-            <a href="/book?check_in=${ci}&check_out=${co}" class="btn-outline-gold" style="font-size:10px;padding:12px 24px">Compare Rooms</a>
+            <a href="/book?room_id=${r.room_id}&check_in=${ci}&check_out=${co}" class="btn-book">
+              Book This Room
+            </a>
           </div>
         </div>
       </div>`).join('');
   }
 
-  function toggleMobileNav() { document.getElementById('navMobile').classList.toggle('open'); }
+  function toggleMobileNav() {
+    document.getElementById('navMobile').classList.toggle('open');
+  }
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('pubNav').classList.toggle('scrolled', window.scrollY > 50);
+  });
 
   searchRooms();
 </script>

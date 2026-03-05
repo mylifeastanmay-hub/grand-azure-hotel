@@ -47,7 +47,7 @@ def create_app(config_class=Config):
     from routes.invoices  import invoices_bp
     from routes.public    import public_bp
 
-    app.register_blueprint(public_bp,       url_prefix='')
+    app.register_blueprint(public_bp,       url_prefix='/public')
     app.register_blueprint(auth_bp,         url_prefix='/auth')
     app.register_blueprint(dashboard_bp,    url_prefix='/admin')
     app.register_blueprint(guests_bp,       url_prefix='/guests')
